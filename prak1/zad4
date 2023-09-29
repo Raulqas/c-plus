@@ -1,4 +1,3 @@
-//не правильно
 const int LED_RED = D0;
 const int LED_YELLOW = D1;
 const int LED_GREEN = D2;
