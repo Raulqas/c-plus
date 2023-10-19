@@ -1,1 +1,17 @@
+#include <Servo.h>
 
+Servo servo;
+
+const int potPin = 26; // Пин для потенциометра
+int potValue = 0;
+
+void setup() {
+servo.attach(0); 
+}
+
+void loop() {
+potValue = analogRead(potPin);
+int angle = map(potValue, 0, 1023, 0, 180); 
+servo.write(angle);
+delay(15); 
+}
