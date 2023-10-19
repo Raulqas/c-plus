@@ -1,0 +1,45 @@
+#include "pico/stdlib.h"
+#include "hardware/pwm.h"
+#include "hardware/adc.h"
+
+const uint fanPin = 0; 
+const uint powerSwitchPin = 1; 
+const uint potPin = 26; 
+
+const uint pwmFrequency = 25000; 
+const uint range = 255; 
+
+void setPWM(uint pin, uint value) {
+pwm_set_gpio_level(pin, value);
+}
+
+int main() {
+// Инициализация стандартных библиотек не выполняется
+
+// Инициализация аналогового входа для потенциометра
+adc_init();
+adc_gpio_init(potPin);
+adc_select_input(0);
+
+
+pwm_set_wrap(fanPin, range);
+pwm_config fanConfig = pwm_get_default_config();
+pwm_config_set_clkdiv(&fanConfig, 1); // Устанавливаем делитель частоты 1 (максимальная частота)
+pwm_init(fanPin, &fanConfig, false);
+
+// Настройка ШИМ для силового ключа
+pwm_set_wrap(powerSwitchPin, range);
+pwm_config switchConfig = pwm_get_default_config();
+pwm_config_set_clkdiv(&switchConfig, 1);
+pwm_init(powerSwitchPin, &switchConfig, false);
+
+while (true) {
+uint potValue = adc_read();
+uint pwmValue = (potValue * range) / 65535;
+
+setPWM(fanPin, pwmValue);
+setPWM(powerSwitchPin, pwmValue);
+}
+
+return 0;
+}
