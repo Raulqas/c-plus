@@ -1,0 +1,37 @@
+#include <SPI.h> 
+#include <AmperkaFET.h> 
+#include <sstream> 
+#include <iostream> 
+
+
+FET mosfet(D17, 2); // Создаем объект mosfet с указанными параметрами
+
+void setup() {
+mosfet.begin(); // Инициализируем mosfet
+Serial.begin(9600); // Инициализируем последовательную связь
+
+
+}
+
+void loop() {
+if (Serial.available()) { // Если есть доступные данные в последовательной связи
+std::stringstream ss;
+ss « Serial.readString().c_str(); // Считываем строку из Serial
+uint32_t modul, key, i; // Объявляем переменные для хранения данных
+int level; // Объявляем переменную для хранения уровня
+ss » modul » key » i; // Извлекаем значения из строки
+
+if (i > 0)
+level = HIGH; 
+else
+level = LOW; 
+
+if (modul > 1)
+modul = 255; 
+
+if (key > 7)
+key = 255; 
+
+mosfet.digitalWrite(modul, key, level); // Устанавливаем уровень для ключа на модуле
+}
+}
