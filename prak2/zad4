@@ -10,7 +10,7 @@ while(!Serial) {
 }
 Serial.println("Инициализация последовательного порта");
 meteoSensor.begin();
-Serial.println("Метеосенсор инициализируется...");
+Serial.println("инициализируется...");
 delay(1000);
 Serial.begin(9600);
 Serial.println("Начало инициализации...");
