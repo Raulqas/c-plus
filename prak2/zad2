@@ -1,45 +1,46 @@
-#include "pico/stdlib.h"
-#include "hardware/pwm.h"
-#include "hardware/adc.h"
+// Подключаем необходимые библиотеки
+#include <SPI.h> // Библиотека для работы с интерфейсом SPI
+#include <AmperkaFET.h> // Библиотека для работы с силовыми ключами
+#include <sstream> // Библиотека для работы со строками
+#include <iostream> // Библиотека для работы с потоками ввода/вывода
 
-const uint fanPin = 0; 
-const uint powerSwitchPin = 1; 
-const uint potPin = 26; 
 
-const uint pwmFrequency = 25000; 
-const uint range = 255; 
+FET mosfet(D17, 2); // Создаем объект mosfet с указанными параметрами
 
-void setPWM(uint pin, uint value) {
-pwm_set_gpio_level(pin, value);
+void setup() {
+mosfet.begin(); // Инициализируем mosfet
+Serial.begin(9600); // Инициализируем последовательную связь
+
+
 }
 
-int main() {
-// Инициализация стандартных библиотек не выполняется
+void loop() {
+if (Serial.available()) { // Если есть доступные данные в последовательной связи
+std::stringstream ss;
+ss « Serial.readString().c_str(); // Считываем строку из Serial
+uint32_t modul, key, i; // Объявляем переменные для хранения данных
+int level; // Объявляем переменную для хранения уровня
+ss » modul » key » i; // Извлекаем значения из строки
 
-// Инициализация аналогового входа для потенциометра
-adc_init();
-adc_gpio_init(potPin);
-adc_select_input(0);
+if (i > 0)
+level = HIGH; // Если i > 0, устанавливаем уровень HIGH
+else
+level = LOW; // В противном случае устанавливаем уровень LOW
 
+if (modul > 1)
+modul = 255; // Если modul > 1, устанавливаем modul = 255
 
-pwm_set_wrap(fanPin, range);
-pwm_config fanConfig = pwm_get_default_config();
-pwm_config_set_clkdiv(&fanConfig, 1); // Устанавливаем делитель частоты 1 (максимальная частота)
-pwm_init(fanPin, &fanConfig, false);
+if (key > 7)
+key = 255; // Если key > 7, устанавливаем key = 255
 
-// Настройка ШИМ для силового ключа
-pwm_set_wrap(powerSwitchPin, range);
-pwm_config switchConfig = pwm_get_default_config();
-pwm_config_set_clkdiv(&switchConfig, 1);
-pwm_init(powerSwitchPin, &switchConfig, false);
-
-while (true) {
-uint potValue = adc_read();
-uint pwmValue = (potValue * range) / 65535;
-
-setPWM(fanPin, pwmValue);
-setPWM(powerSwitchPin, pwmValue);
+mosfet.digitalWrite(modul, key, level); // Устанавливаем уровень для ключа на модуле
 }
-
-return 0;
+}
+void setup() {
+analogWriteFreq(25000);
+}
+void loop() {
+int pvm = map(analogRead(A0), 0, 4095, 0, 255);
+analogWrite(D0, pvm);
+analogWrite(D1, pvm);
 }
