@@ -1,0 +1,31 @@
+#include <ESP8266WiFi.h>
+
+const char* ssid = "ASOIU"; 
+const char* password = "kaf.asoiu.48"; 
+const char* pingHost = "example.com"; 
+
+void setup() {
+  Serial.begin(115200);
+
+// Подключение к Wi-Fi
+WiFi.begin(ssid, password);
+while (WiFi.status() != WL_CONNECTED) {
+  delay(1000);
+  Serial.println("Подключение к Wi-Fi...");
+}
+
+Serial.println("Подключено к Wi-Fi.");
+Serial.print("IP-адрес: ");
+Serial.println(WiFi.localIP());
+}
+
+void loop() {
+// Выполнение пинга на заданный хост
+  int packetLoss = WiFi.ping(pingHost);
+
+  Serial.print("Пинг результат: ");
+  Serial.print(packetLoss);
+  Serial.println(" % пакетов потеряно");
+
+  delay(5000); // Пауза 5 секунд между пингами
+}
