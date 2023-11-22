@@ -2,7 +2,6 @@
 #include <WiFi.h>
 #include <string>
 
-// Указываем SSID и пароль для подключения к WiFi
 String ssid = "ASOIU";
 String password = "kaf.asoiu.48";
 int status = WL_IDLE_STATUS; 
