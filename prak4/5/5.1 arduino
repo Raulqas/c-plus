@@ -1,0 +1,26 @@
+#include <Wire.h>
+
+const int I2C_ADDR = 32;
+const int pwm_pin = 9; // Change to the appropriate PWM pin
+struct EncoderData {
+int hiddenEncoder;
+};
+
+void receiveEvent(int sizeBytes) {
+if (sizeBytes == sizeof(EncoderData)) {
+EncoderData dataRec;
+Wire.readBytes(reinterpret_cast<uint8_t*>(&dataRec), sizeof(EncoderData));
+Serial.println(dataRec.hiddenEncoder);
+analogWrite(pwm_pin, dataRec.hiddenEncoder);
+}
+}
+
+void setup() {
+Wire.begin(I2C_ADDR);
+Wire.onReceive(receiveEvent);
+Serial.begin(9600);
+}
+
+void loop() {
+// Your main loop code here
+}
