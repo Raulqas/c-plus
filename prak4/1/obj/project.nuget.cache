@@ -1,0 +1,15 @@
+{
+  "version": 2,
+  "dgSpecHash": "i/7Ctm2S3FuGR3fEmHTxbfygNRnABTAbj9VhuPNXheifsSa0wECwLghV6lH++Ih8jVepiOLCZJqfzxiZcde+1w==",
+  "success": false,
+  "projectFilePath": "/home/hasanov_rz/Рабочий стол/а/Practice/Lab4/task1/task1.csproj",
+  "expectedPackageFiles": [],
+  "logs": [
+    {
+      "code": "NU1301",
+      "level": "Error",
+      "message": "Локальный источник \"/home/hasanov_rz/.nuget/NuGet/The full path to the folder with local packages\" не существует.",
+      "libraryId": "Raven.Iot.Device.Bindings"
+    }
+  ]
+}

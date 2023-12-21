@@ -1,0 +1,83 @@
+{
+  "version": 3,
+  "targets": {
+    "net8.0": {}
+  },
+  "libraries": {},
+  "projectFileDependencyGroups": {
+    "net8.0": [
+      "Raven.Iot.Device.Bindings >= 1.0.0"
+    ]
+  },
+  "packageFolders": {
+    "/home/hasanov_rz/.nuget/packages/": {}
+  },
+  "project": {
+    "version": "1.0.0",
+    "restore": {
+      "projectUniqueName": "/home/hasanov_rz/Рабочий стол/а/Practice/Lab4/task1/task1.csproj",
+      "projectName": "task1",
+      "projectPath": "/home/hasanov_rz/Рабочий стол/а/Practice/Lab4/task1/task1.csproj",
+      "packagesPath": "/home/hasanov_rz/.nuget/packages/",
+      "outputPath": "/home/hasanov_rz/Рабочий стол/а/Practice/Lab4/task1/obj/",
+      "projectStyle": "PackageReference",
+      "configFilePaths": [
+        "/home/hasanov_rz/.nuget/NuGet/NuGet.Config"
+      ],
+      "originalTargetFrameworks": [
+        "net8.0"
+      ],
+      "sources": {
+        "/home/hasanov_rz/.nuget/NuGet/The full path to the folder with local packages": {},
+        "https://api.nuget.org/v3/index.json": {}
+      },
+      "frameworks": {
+        "net8.0": {
+          "targetAlias": "net8.0",
+          "projectReferences": {}
+        }
+      },
+      "warningProperties": {
+        "warnAsError": [
+          "NU1605"
+        ]
+      }
+    },
+    "frameworks": {
+      "net8.0": {
+        "targetAlias": "net8.0",
+        "dependencies": {
+          "Raven.Iot.Device.Bindings": {
+            "target": "Package",
+            "version": "[1.0.0, )"
+          }
+        },
+        "imports": [
+          "net461",
+          "net462",
+          "net47",
+          "net471",
+          "net472",
+          "net48",
+          "net481"
+        ],
+        "assetTargetFallback": true,
+        "warn": true,
+        "frameworkReferences": {
+          "Microsoft.NETCore.App": {
+            "privateAssets": "all"
+          }
+        },
+        "runtimeIdentifierGraphPath": "/usr/share/dotnet/sdk/8.0.100/PortableRuntimeIdentifierGraph.json"
+      }
+    }
+  },
+  "logs": [
+    {
+      "code": "NU1301",
+      "level": "Error",
+      "message": "Локальный источник \"/home/hasanov_rz/.nuget/NuGet/The full path to the folder with local packages\" не существует.",
+      "libraryId": "Raven.Iot.Device.Bindings"
+    }
+  ]
+}
